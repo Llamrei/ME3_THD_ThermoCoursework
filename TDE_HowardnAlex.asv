@@ -78,13 +78,11 @@ Tpsh(6,:) = Tpsh(19,:);  %ASSUMING constant intensive for pipe
 %% SOFC solutions
 % Compressor
 comp_Rp = 23;   %GBC
-Tpsh(1,sInput) = 11140.46; %J/kg/K - from GASEQ
-Tpsh(1,hInput) = -4500.97; %J/kg/K - from GASEQ, of formation
-Tpsh(4,pInput) = comp_Rp * Tpsh(1,pInput); %GBC
+Tpsh(4,pInput) = comp_Rp * Tpsh(1,pInput);
 Tpsh(4,tInput) = 535;  %From Adiabatic compression of natural gas in gaseq - almost Isentropic
-Tpsh(4,hInput) = -3878.63;  %J/kg/K - from GASEQ, of formation
+Tpsh(4,hInput) = -3878.63;  %J/kg/K - from GASEQ
 Tpsh(4,sInput) = 11141.76;  %J/kg/K - from GASEQ
-Tpsh(5,:) = Tpsh(4,:);  %ASSUMING connected pipes share intensive properties
+
 Cp_4 = 2937.12; %J/kg/K - from GASEQ
 Cp_5star = Cp_4;
 Cp_5 = Cp_4;
@@ -102,24 +100,17 @@ steam2Carb = 3;
 MassMethaneFrac_4 = 0.88505;
 mass_flowrate(6) = MassMethaneFrac_4*mass_flowrate(5)*(MW_H2O/MW_CH4)/steam2Carb;
 % GASEQ used to solve: see Reformer.eq
-Tpsh(7,:) = [800+273.1 23*atm 13067.73 -8964.34];
+Tpsh(7,:) = [800+273.1 23*atm 0 0];
 
 % SOFC
-%Get the mass of air - ASSUMING conservation of mass
+%Get the mass of air
 mass_flowrate(3) = mass_flowrate(2);
 mass_flowrate(9) = mass_flowrate(3) - mass_flowrate(13);
-%Get properties of air from second compressor - using GASEQ
-Tpsh(2,hInput) = -10.04;
-Tpsh(2,sInput) = 6826.13;
-Tpsh(3,:) = [692 23 6825.94 406.7]; %Enthalpies of formation?
+%Get properties of air from second compressor - identical to first
 %ASSUMING connected pipes share intensive properties
+Tpsh(3,:) = Tpsh(7,:);
 Tpsh(13,:) = Tpsh(3,:);
-Tpsh(9,:) = Tpsh(3,:);
-%Analyse change through heat exchanger
-%ASSUMING no pressure loss across heat exchanger
-HXpLoss = 0;
-Tpsh(10,:) = [1073.15 Tpsh(9,pInput)*(1-HXpLoss) 7314.41 832.25];
-
+Tpsh(9,:) = Tpsh(7,:);
 
 
 
