@@ -25,6 +25,7 @@ Tpsh(17,1:2) = [838.65 122*atm];
 Tpsh(16,1:2) = [155+273.15 1.01*atm];
 Tpsh(2,1:2) = [15+273.15 1*atm];
 Tpsh(1,1:2) = [15+273.15 1*atm];
+Tpsh(15,pInput) = 1.026*atm;
 
 mass_flowrate(1) = 23.9;
 mass_flowrate(2) = 598.7;
@@ -141,10 +142,31 @@ O2_Relative_H2_8_8 = O2_MoleFlow_8/H2_MoleFlow_8;
 O2_Relative_H2_10_8 = O2_MoleFlow_10/H2_MoleFlow_8;
 
 Tpsh(8,:) = [900+273.1 23*atm 9113.37 -2249.13];    %GASEQ
+mass_flowrate(8) = mass_flowrate(7) + mass_flowrate(10); %Assuming negligible electron mass loss
 Cp_8 = 1578.83;
 
-Tpsh(11,:) = [1940.9 23*atm 9740.3 -2249.13];       %GASEQ
-Tpsh(12,:) = [1693.6 23*atm 9505.82 -2674.7];       %GASEQ
+Tpsh(11,:) = [1940.9 23*atm 9740.3 -2249.13];       %GASEQ - Adiabatic
+Tpsh(12,:) = [1693.6 23*atm 9505.82 -2674.7];       %GASEQ - Iteration to find right enthalpy for pressure
+mass_flowrate(11) = mass_flowrate(8);
+mass_flowrate(12) = mass_flowrate(11);
 
+%% Gas Cycle
+%Figure out combustor incoming mole ratios of streams for GASEQ flows
+MW_13 = 28.96;
+MW_25 = 17.27;
+MW_12 = 24.67;
+mole_flowrate_13 = mass_flowrate(13)/MW_13;
+mole_flowrate_25 = mass_flowrate(25)/MW_25;
+mole_flowrate_12 = mass_flowrate(12)/MW_12;
+%Modelling as constant pressure combustion and then pressure loss in
+%pipiing or whatever for GASEQ const. P analysis, so both combustor and
+%combuster_pressureloss are relevant
+Tpsh(14,:) = [1824.4 23*atm*0.92 9054.84 -1527.24];   %GASEQ
+
+%Treating 14->15 as ideal gas (worst assumption as is ~15% drop in Cp)
+Gamma_14 = 1.251;
+Tpsh(15,tInput) = Tpsh(14,tInput)*exp((Gamma_14 - 1)/(Gamma_14)*log(Tpsh(15,pInput)/Tpsh(14,pInput)));
+Tpsh(15,sInput:hInput) = [9104.06 -2771.48];    %GASEQ with ideal gas assumption
+Tpsh(16,sInput:hInput) = [8038.24 -3497.64];    %GASEQ with ideal gas assumption
 
 

@@ -10,7 +10,7 @@ pInput = 2;
 sInput = 3;
 hInput = 4;
 
-Tpsh = zeros(24,4); %Kelvins, Bar
+Tpsh = zeros(25,4); %Kelvins, Bar
 mass_flowrate = zeros(24,1);%Kg/s
 atm = 1.013; %enable conversion of atm into bar
 
@@ -85,8 +85,9 @@ Tpsh(4,tInput) = 536;  %From Adiabatic compression of natural gas in gaseq - alm
 Tpsh(4,hInput) = -3739.55;  %J/kg/K - from GASEQ, of formation
 Tpsh(4,sInput) = 11027.59;  %J/kg/K - from GASEQ
 Tpsh(5,:) = Tpsh(4,:);  %ASSUMING connected pipes share intensive properties
+Tpsh(25,:) = Tpsh(4,:);
 Cp_4 = 2881.11; %J/kg/K - from GASEQ
-Cp_5star = Cp_4;
+Cp_25 = Cp_4;
 Cp_5 = Cp_4;
 mass_flowrate(4) = mass_flowrate(1);
 
@@ -140,9 +141,23 @@ O2_Relative_H2_8_8 = O2_MoleFlow_8/H2_MoleFlow_8;
 O2_Relative_H2_10_8 = O2_MoleFlow_10/H2_MoleFlow_8;
 
 Tpsh(8,:) = [900+273.1 23*atm 9113.37 -2249.13];    %GASEQ
+mass_flowrate(8) = mass_flowrate(7) + mass_flowrate(10); %Assuming negligible electron mass loss
 Cp_8 = 1578.83;
 
-Tpsh(11,:) = [1940.9 23*atm 9740.3 -2249.13];       %GASEQ
+Tpsh(11,:) = [1940.9 23*atm 9740.3 -2249.13];       %GASEQ - Adiabatic
+Tpsh(12,:) = [1693.6 23*atm 9505.82 -2674.7];       %GASEQ - Iteration to find right enthalpy for pressure
+mass_flowrate(11) = mass_flowrate(8);
+mass_flowrate(12) = mass_flowrate(11);
 
+%% Gas Cycle
+%Figure out combustor incoming mole ratios of streams for GASEQ flows
+MW_13 = 28.96;
+MW_25 = 17.27;
+MW_12 = 24.67;
+mole_flowrate_13 = mass_flowrate(13)/MW_13;
+mole_flowrate_25 = mass_flowrate(25)/MW_25;
+mole_flowrate_12 = mass_flowrate(12)/MW_12;
+
+Tpsh(14
 
 
