@@ -78,14 +78,14 @@ Tpsh(6,:) = Tpsh(19,:);  %ASSUMING constant intensive for pipe
 %% SOFC solutions
 % Compressor
 comp_Rp = 23;   %GBC
-Tpsh(1,sInput) = 11140.46; %J/kg/K - from GASEQ
-Tpsh(1,hInput) = -4500.97; %J/kg/K - from GASEQ, of formation
+Tpsh(1,sInput) = 11027.23; %J/kg/K - from GASEQ
+Tpsh(1,hInput) = -4352.96; %J/kg/K - from GASEQ, of formation
 Tpsh(4,pInput) = comp_Rp * Tpsh(1,pInput); %GBC
-Tpsh(4,tInput) = 535;  %From Adiabatic compression of natural gas in gaseq - almost Isentropic
-Tpsh(4,hInput) = -3878.63;  %J/kg/K - from GASEQ, of formation
-Tpsh(4,sInput) = 11141.76;  %J/kg/K - from GASEQ
+Tpsh(4,tInput) = 536;  %From Adiabatic compression of natural gas in gaseq - almost Isentropic
+Tpsh(4,hInput) = -3739.55;  %J/kg/K - from GASEQ, of formation
+Tpsh(4,sInput) = 11027.59;  %J/kg/K - from GASEQ
 Tpsh(5,:) = Tpsh(4,:);  %ASSUMING connected pipes share intensive properties
-Cp_4 = 2937.12; %J/kg/K - from GASEQ
+Cp_4 = 2881.11; %J/kg/K - from GASEQ
 Cp_5star = Cp_4;
 Cp_5 = Cp_4;
 mass_flowrate(4) = mass_flowrate(1);
@@ -97,21 +97,23 @@ mass_flowrate(25) = mass_flowrate(4) - mass_flowrate(5);    %stream 25 represent
 % pressure also 23atm
 % Firstly, deduce mass flowrate of steam from 6
 MW_H2O = 18;
-MW_CH4 = 16;
+MW_NG_4 = 17.27;
 steam2Carb = 3;
-MassMethaneFrac_4 = 0.88505;
-mass_flowrate(6) = MassMethaneFrac_4*mass_flowrate(5)*(MW_H2O/MW_CH4)/steam2Carb;
+mass_flowrate(6) = mass_flowrate(5)*(MW_H2O/MW_NG_4)*steam2Carb;
+mass_flowrate(7) = mass_flowrate(5) + mass_flowrate(6);
+% Then get property variation through the reformer
 % GASEQ used to solve: see Reformer.eq
-Tpsh(7,:) = [800+273.1 23*atm 13067.73 -8964.34];
+Tpsh(7,:) = [800+273.1 23*atm 14725.55 -7321.93];
 
 % SOFC
 %Get the mass of air - ASSUMING conservation of mass
 mass_flowrate(3) = mass_flowrate(2);
 mass_flowrate(9) = mass_flowrate(3) - mass_flowrate(13);
+mass_flowrate(10) = mass_flowrate(9);
 %Get properties of air from second compressor - using GASEQ
 Tpsh(2,hInput) = -10.04;
 Tpsh(2,sInput) = 6826.13;
-Tpsh(3,:) = [692 23 6825.94 406.7]; %Enthalpies of formation?
+Tpsh(3,:) = [692 23 6825.94 406.7]; %From GASEQ
 %ASSUMING connected pipes share intensive properties
 Tpsh(13,:) = Tpsh(3,:);
 Tpsh(9,:) = Tpsh(3,:);
@@ -120,9 +122,27 @@ Tpsh(9,:) = Tpsh(3,:);
 HXpLoss = 0;
 Tpsh(10,:) = [1073.15 Tpsh(9,pInput)*(1-HXpLoss) 7314.41 832.25];
 
+% Calculate no. of moles of H2 flowing into Anode
+MW_H2 = 2;
+MW_O2 = 32;
+H2_MassFrac_7 = 0.06843;
+H2_MassFlow_7 = mass_flowrate(7)*H2_MassFrac_7;
+H2_MoleFlow_7 = H2_MassFlow_7/MW_H2;    %in Kmol
 
+Fuel_Util = 0.7;
+H2_MoleReactFlow = Fuel_Util*H2_MoleFlow_7;
+O2_MoleReactFlow = 0.5*H2_MoleReactFlow;
+O2_MassFrac_10 = 0.23156;
+O2_MoleFlow_10 = mass_flowrate(10)*O2_MassFrac_10/MW_O2;
+O2_MoleFlow_8 = O2_MoleFlow_10 - O2_MoleReactFlow;
+H2_MoleFlow_8 = H2_MoleFlow_7 - H2_MoleReactFlow;
+O2_Relative_H2_8_8 = O2_MoleFlow_8/H2_MoleFlow_8;
+O2_Relative_H2_10_8 = O2_MoleFlow_10/H2_MoleFlow_8;
 
+Tpsh(8,:) = [900+273.1 23*atm 9113.37 -2249.13];    %GASEQ
+Cp_8 = 1578.83;
 
+Tpsh(11,:) = [1940.9 23*atm 9740.3 -2249.13];       %GASEQ
 
 
 
