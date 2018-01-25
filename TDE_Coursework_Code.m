@@ -177,6 +177,23 @@ Tpsh(15,tInput) = Tpsh(14,tInput)*exp((Gamma_14 - 1)/(Gamma_14)*log(Tpsh(15,pInp
 Tpsh(15,sInput:hInput) = [9133.20 -2742.21];    %GASEQ - Composition 15.eq
 Tpsh(16,sInput:hInput) = [8038.24 -3497.64];    %GASEQ - Composition 16.eq
 mass_flowrate(16) = mass_flowrate(15);
+
+% Using knowledge of mass flowrate and enthalpies of air can determine mass
+% flowrate of water side
+mass_flowrate(24) = -1*mass_flowrate(15)*(Tpsh(16,hInput)-Tpsh(15,hInput))...
+    /((Tpsh(17,hInput)-Tpsh(24,hInput)) + (Tpsh(19,hInput)-Tpsh(18,hInput)));
+mass_flowrate(17) = mass_flowrate(24);
+mass_flowrate(18) = mass_flowrate(17);
+mass_flowrate(19) = mass_flowrate(18);
+mass_flowrate(20) = mass_flowrate(19) - mass_flowrate(6);
+mass_flowrate(21) = mass_flowrate(20);
+mass_flowrate(22) = mass_flowrate(21);
+%Make up the difference in feed
+mass_flowrate(23) = mass_flowrate(24) - mass_flowrate(22);
+if(mass_flowrate(23) == mass_flowrate(6))
+   disp('Masses check out'); 
+end 
+
 %% Question 2
 % Volts per cell
 s0_H2O = 188;    %J/(mol K)
