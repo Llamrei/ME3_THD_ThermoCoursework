@@ -26,7 +26,7 @@ HCN                      5.2346e-09  5.235e-09
 flow13                   No.moles   Mole fraction
 O2                       2.0958e-01  0.20958
 N2                       7.8111e-01  0.78111
-AR                       9.3043e-03  0.00930
+AR                       9.3044e-03  0.00930
 
 flow25                   No.moles   Mole fraction
 CH4                      9.1300e-01  0.91300
@@ -72,27 +72,27 @@ HCN                      1.4739e-36  5.728e-38
 AR                       8.1828e-02  3.180e-03
 
 [Properties]             Reactants     Products
-Temperature,K               994.       994.
+Temperature,K               1015.      994.
 Pressure,atm                1.03       1.03
-Volume_Ratio                1          1.0
+Volume_Ratio                1          0.979
 Moles Prod/React                       1.000000
 Stoichimetry,Phi                       0.000
-H0,  kJ/mol                 -73.086    -73.086
-S0,  J/mol/K                240.326    240.326
-Cp,  J/mol/K                36.673     36.673
-Gamma, Cp/Cv                1.293      1.293
+H0,  kJ/mol                 -72.314    -73.086
+S0,  J/mol/K                241.094    240.326
+Cp,  J/mol/K                36.840     36.673
+Gamma, Cp/Cv                1.291      1.293
 Mean Molecular Weight, g    26.37      26.37
-Density,  kg/m3             0.3330     0.33300
-Sound speed,  m/s           636.4      636.4
-Enthalpy, H,  kJ/kg         -2771.48   -2771.48
-Entropy,  S,  J/kg/K        9104.06    9104.06
-Intern Energy, U,  kJ/kg    -3084.87   -3084.87
-Free Energy, G, kJ/kg       -11820.92  -11820.92
-Cp, J/kg/K                  1390.69    1390.69
-Volume/mole,  m3            79.1913    79.191
-Molecules/cc                7.61E+18   7.61E+18
-Moles/cc                    1.26E-05   1.26E-05
-Viscosity,  kg/m/s          4.04E-05   4.04E-05
-KinematicVisc,  m2/s        1.21E-04   1.21E-04
-ThermCond,J/m/K/s           6.95E-02   6.95E-02
-ThDiffusivity,  m2/s        1.50E-04   1.50E-04
+Density,  kg/m3             0.3261     0.33300
+Sound speed,  m/s           642.7      636.4
+Enthalpy, H,  kJ/kg         -2742.21   -2771.48
+Entropy,  S,  J/kg/K        9133.20    9104.06
+Intern Energy, U,  kJ/kg    -3062.23   -3084.87
+Free Energy, G, kJ/kg       -12012.41  -11820.92
+Cp, J/kg/K                  1396.99    1390.69
+Volume/mole,  m3            80.8643    79.191
+Molecules/cc                7.45E+18   7.61E+18
+Moles/cc                    1.24E-05   1.26E-05
+Viscosity,  kg/m/s          4.10E-05   4.04E-05
+KinematicVisc,  m2/s        1.26E-04   1.21E-04
+ThermCond,J/m/K/s           7.09E-02   6.95E-02
+ThDiffusivity,  m2/s        1.56E-04   1.50E-04

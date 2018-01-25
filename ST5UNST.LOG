@@ -1,0 +1,153 @@
+ %% PLEASE DO NOT MODIFY OR DELETE THIS FILE! %% 
+ %% This file contains information about the installation of an application. %% 
+ %% It will be used to automatically remove all application components from your computer if you choose to do so. %% 
+
+
+NOTE: Beginning of the bootstrapper section
+
+CONFIG: Title: "GASEQ"
+
+ACTION: TempFile: "C:\Windows\setup1.exe"
+(File was not found or was an older version -- new file copied)
+
+ACTION: RegKey: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion", "SharedDLLs"
+
+ACTION: SharedFile: "C:\Windows\System32\VB5StKit.dll"
+(File currently on disk was already up to date)
+
+ACTION: SystemFile: "C:\Windows\System32\MSVBVM50.dll"
+(File currently on disk was already up to date)
+
+ACTION: SystemFile: "C:\Windows\System32\StdOle2.tlb"
+(File currently on disk was already up to date)
+
+ACTION: SystemFile: "C:\Windows\System32\OleAut32.dll"
+(File currently on disk was already up to date)
+
+ACTION: SystemFile: "C:\Windows\System32\OlePro32.dll"
+(File currently on disk was already up to date)
+
+ACTION: SystemFile: "C:\Windows\System32\AsycFilt.dll"
+(File currently on disk was already up to date)
+
+NOTE: The file 'Ctl3d32.dll' was not copied because it is intended for use under Windows NT 3.51 only.  It is not needed under Windows 95 or NT 4.0.
+
+ACTION: SystemFile: "C:\Windows\System32\Ctl3d32.dll"
+(File currently on disk was already up to date)
+
+ACTION: SystemFile: "C:\Windows\System32\ComCat.dll"
+(File currently on disk was already up to date)
+
+ACTION: DllSelfRegister: "C:\WINDOWS\system32\MSVBVM50.dll"
+
+ACTION: TLBRegister: "C:\WINDOWS\system32\StdOle2.tlb"
+
+ACTION: DllSelfRegister: "C:\WINDOWS\system32\OleAut32.dll"
+
+ACTION: DllSelfRegister: "C:\WINDOWS\system32\OlePro32.dll"
+
+ACTION: DllSelfRegister: "C:\WINDOWS\system32\ComCat.dll"
+
+NOTE: End of the bootstrapper section
+
+NOTE: Now spawning the main Setup program 'C:\Windows\setup1.exe'....
+
+ACTION: CreateDir: "C:\Program Files (x86)\GASEQ"
+
+ACTION: SharedFile: "C:\Windows\System32\eq32079.dll"
+(File currently on disk was already up to date)
+
+ACTION: SharedFile: "C:\Windows\System32\SHFolder.dll"
+(File currently on disk was already up to date)
+
+ACTION: PrivateFile: "C:\Program Files (x86)\GASEQ\GASEQ.HLP"
+(File was not found or was an older version -- new file copied)
+
+ACTION: PrivateFile: "C:\Program Files (x86)\GASEQ\Gaseq.exe"
+(File was not found or was an older version -- new file copied)
+
+ACTION: PrivateFile: "C:\Program Files (x86)\GASEQ\tran.dat"
+(File was not found or was an older version -- new file copied)
+
+ACTION: PrivateFile: "C:\Program Files (x86)\GASEQ\STANDARD.EQ"
+(File was not found or was an older version -- new file copied)
+
+ACTION: PrivateFile: "C:\Program Files (x86)\GASEQ\Thermdat.tdd"
+(File was not found or was an older version -- new file copied)
+
+*** ERROR: No entrypoint for DllRegisterServer() was found in 'C:\Windows\System32\SHFolder.dll'
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: An error occurred while registering the file 'C:\Windows\System32\SHFolder.dll'
+*** ERROR: (User Responded with 'Retry')
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: No entrypoint for DllRegisterServer() was found in 'C:\Windows\System32\SHFolder.dll'
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: An error occurred while registering the file 'C:\Windows\System32\SHFolder.dll'
+*** ERROR: (User Responded with 'Retry')
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: No entrypoint for DllRegisterServer() was found in 'C:\Windows\System32\SHFolder.dll'
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: An error occurred while registering the file 'C:\Windows\System32\SHFolder.dll'
+*** ERROR: (User Responded with 'Retry')
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: No entrypoint for DllRegisterServer() was found in 'C:\Windows\System32\SHFolder.dll'
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: An error occurred while registering the file 'C:\Windows\System32\SHFolder.dll'
+*** ERROR: (User Responded with 'Retry')
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: No entrypoint for DllRegisterServer() was found in 'C:\Windows\System32\SHFolder.dll'
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: An error occurred while registering the file 'C:\Windows\System32\SHFolder.dll'
+*** ERROR: (User Responded with 'Retry')
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: No entrypoint for DllRegisterServer() was found in 'C:\Windows\System32\SHFolder.dll'
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: An error occurred while registering the file 'C:\Windows\System32\SHFolder.dll'
+*** ERROR: (User Responded with 'Retry')
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: No entrypoint for DllRegisterServer() was found in 'C:\Windows\System32\SHFolder.dll'
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: An error occurred while registering the file 'C:\Windows\System32\SHFolder.dll'
+*** ERROR: (User Responded with 'Retry')
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: No entrypoint for DllRegisterServer() was found in 'C:\Windows\System32\SHFolder.dll'
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: An error occurred while registering the file 'C:\Windows\System32\SHFolder.dll'
+*** ERROR: (User Responded with 'Retry')
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: No entrypoint for DllRegisterServer() was found in 'C:\Windows\System32\SHFolder.dll'
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: An error occurred while registering the file 'C:\Windows\System32\SHFolder.dll'
+*** ERROR: (User Responded with 'Retry')
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: No entrypoint for DllRegisterServer() was found in 'C:\Windows\System32\SHFolder.dll'
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+*** ERROR: An error occurred while registering the file 'C:\Windows\System32\SHFolder.dll'
+*** ERROR: (User Responded with 'Ignore')
+*** DURING THIS ACTION: DllSelfRegister: "C:\Windows\System32\SHFolder.dll"
+
+ACTION: ShellLink: "", "GASEQ"
+
+ACTION: RegKey: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion", "App Paths\Gaseq.exe"
+
+ACTION: RegValue: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\Gaseq.exe", ""
+

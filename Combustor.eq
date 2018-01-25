@@ -26,7 +26,7 @@ HCN                      5.2346e-09  5.235e-09
 flow13                   No.moles   Mole fraction
 O2                       2.0958e-01  0.20958
 N2                       7.8111e-01  0.78111
-AR                       9.3039e-03  0.00930
+AR                       9.3040e-03  0.00930
 
 flow25                   No.moles   Mole fraction
 CH4                      9.1300e-01  0.91300
@@ -39,48 +39,48 @@ O2                       1.0000e-04  1.000e-04
 
 [Reactants]              No.moles   Mole fraction
 flow25                   3.4740e-01  0.01332      536 K
-flow12                   1.6938e+01  0.64946      1693.6 K
+flow12                   1.6938e+01  0.64946      1737 K
 flow13                   8.7949e+00  0.33722      692 K
 
 [Products]               No.moles   Mole fraction
-H2O                      7.4294e+00  0.28871
-CO2                      1.7412e+00  0.06766
-CO                       5.4727e-04  2.127e-05
-O2                       7.6668e-01  0.02979
-H2                       6.0047e-04  2.333e-05
-CH4                      2.1742e-21  8.449e-23
-C2H6                     8.8392e-41  3.435e-42
-N2                       1.5672e+01  0.60901
-NO                       4.1050e-02  1.595e-03
-NO2                      1.6667e-04  6.477e-06
-NH3                      1.4922e-09  5.799e-11
-NH2                      7.5867e-11  2.948e-12
-N                        2.3376e-10  9.084e-12
-HCN                      6.7426e-15  2.620e-16
-AR                       8.1826e-02  3.180e-03
+H2O                      7.4292e+00  0.28870
+CO2                      1.7410e+00  0.06766
+CO                       7.2685e-04  2.825e-05
+O2                       7.6491e-01  0.02972
+H2                       7.7562e-04  3.014e-05
+CH4                      4.9462e-21  1.922e-22
+C2H6                     3.8374e-40  1.491e-41
+N2                       1.5670e+01  0.60893
+NO                       4.4942e-02  1.746e-03
+NO2                      1.7193e-04  6.681e-06
+NH3                      2.0709e-09  8.047e-11
+NH2                      1.1808e-10  4.589e-12
+N                        3.8014e-10  1.477e-11
+HCN                      1.3117e-14  5.097e-16
+AR                       8.1827e-02  3.180e-03
 
 [Properties]             Reactants     Products
-Temperature,K               300.       1824.4
+Temperature,K               300.       1852.9
 Pressure,atm                23.        23.
-Volume_Ratio                1          6.0
-Moles Prod/React                       0.986687
+Volume_Ratio                1          6.094
+Moles Prod/React                       0.986694
 Stoichimetry,Phi                       0.573
-H0,  kJ/mol                 -39.738    -40.274
-S0,  J/mol/K                260.705    264.154
-Cp,  J/mol/K                38.313     41.401
-Gamma, Cp/Cv                1.277      1.251
+H0,  kJ/mol                 -38.555    -39.075
+S0,  J/mol/K                261.395    264.805
+Cp,  J/mol/K                38.447     41.509
+Gamma, Cp/Cv                1.276      1.250
 Mean Molecular Weight, g    26.02      26.37
-Density,  kg/m3             24.3092    4.05127
-Sound speed,  m/s           349.8      848.2
-Enthalpy, H,  kJ/kg         -1527.27   -1527.27
-Entropy,  S,  J/kg/K        9017.82    9028.57
-Intern Energy, U,  kJ/kg    -1623.14   -2102.49
-Free Energy, G, kJ/kg       -4232.62   -17999.03
-Cp, J/kg/K                  1472.48    1570.00
-Volume/mole,  m3            1.0703     6.509
-Molecules/cc                5.63E+20   9.25E+19
-Moles/cc                    9.34E-04   1.54E-04
-Viscosity,  kg/m/s          1.61E-05   6.25E-05
-KinematicVisc,  m2/s        6.61E-07   1.54E-05
-ThermCond,J/m/K/s           2.42E-02   1.20E-01
-ThDiffusivity,  m2/s        6.77E-07   1.89E-05
+Density,  kg/m3             24.3092    3.98892
+Sound speed,  m/s           349.6      854.5
+Enthalpy, H,  kJ/kg         -1481.80   -1481.80
+Entropy,  S,  J/kg/K        9044.33    9053.30
+Intern Energy, U,  kJ/kg    -1577.66   -2066.01
+Free Energy, G, kJ/kg       -4195.10   -18256.76
+Cp, J/kg/K                  1477.64    1574.10
+Volume/mole,  m3            1.0703     6.611
+Molecules/cc                5.63E+20   9.11E+19
+Moles/cc                    9.34E-04   1.51E-04
+Viscosity,  kg/m/s          1.61E-05   6.32E-05
+KinematicVisc,  m2/s        6.61E-07   1.58E-05
+ThermCond,J/m/K/s           2.42E-02   1.22E-01
+ThDiffusivity,  m2/s        6.75E-07   1.94E-05

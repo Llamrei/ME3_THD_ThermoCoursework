@@ -1,16 +1,17 @@
+%% SETUP
 clear
 
 last2CID = 23;
 Y = mod(last2CID, 10);
 X = Y + (last2CID - Y)/10;
 
-%% Array to store results
+%% Array to store results - fill in given values
 tInput = 1;
 pInput = 2;
 sInput = 3;
 hInput = 4;
 
-Tpsh = zeros(25,4); %Kelvins, Bar
+Tpsh = zeros(25,4); %Kelvins, Bar, J/Kg, kJ/Kg
 mass_flowrate = zeros(24,1);%Kg/s
 atm = 1.013; %enable conversion of atm into bar
 
@@ -25,6 +26,7 @@ Tpsh(17,1:2) = [838.65 122*atm];
 Tpsh(16,1:2) = [155+273.15 1.01*atm];
 Tpsh(2,1:2) = [15+273.15 1*atm];
 Tpsh(1,1:2) = [15+273.15 1*atm];
+Tpsh(15,pInput) = 1.026*atm;
 
 mass_flowrate(1) = 23.9;
 mass_flowrate(2) = 598.7;
@@ -75,21 +77,21 @@ Tpsh(24,sInput) = XSteam('s_pT', Tpsh(24,pInput), Tpsh(24,tInput) - 273.1);
 Tpsh(24,hInput) = XSteam('h_pT', Tpsh(24,pInput), Tpsh(24,tInput) - 273.1);
 Tpsh(6,:) = Tpsh(19,:);  %ASSUMING constant intensive for pipe
 
-%% SOFC solutions
-% Compressor
+%% NG/SOFC solutions
+% Compressor - NG_Compressor.eq
 comp_Rp = 23;   %GBC
 Tpsh(1,sInput) = 11027.23; %J/kg/K - from GASEQ
-Tpsh(1,hInput) = -4352.96; %J/kg/K - from GASEQ, of formation
-Tpsh(4,pInput) = comp_Rp * Tpsh(1,pInput); %GBC
-Tpsh(4,tInput) = 536;  %From Adiabatic compression of natural gas in gaseq - almost Isentropic
-Tpsh(4,hInput) = -3739.55;  %J/kg/K - from GASEQ, of formation
 Tpsh(4,sInput) = 11027.59;  %J/kg/K - from GASEQ
+Tpsh(1,hInput) = -4352.96; %kJ/kg/K - from GASEQ, of formation
+Tpsh(4,hInput) = -3739.55;  %kJ/kg/K - from GASEQ, of formation
+Tpsh(4,pInput) = comp_Rp * Tpsh(1,pInput); %GBC
+Tpsh(4,tInput) = 536;  %From Adiabatic compression of natural gas in GASEQ - almost Isentropic
 Tpsh(5,:) = Tpsh(4,:);  %ASSUMING connected pipes share intensive properties
-Tpsh(25,:) = Tpsh(4,:);
-Cp_4 = 2881.11; %J/kg/K - from GASEQ
-Cp_25 = Cp_4;
-Cp_5 = Cp_4;
-mass_flowrate(4) = mass_flowrate(1);
+Tpsh(25,:) = Tpsh(4,:); %K
+Cp_4 = 2881.11; %J/kg/K
+Cp_25 = Cp_4;   %J/kg/K
+Cp_5 = Cp_4;    %J/kg/K
+mass_flowrate(4) = mass_flowrate(1);    %kg/s
 
 % Split to reformer, conserve mass
 mass_flowrate(25) = mass_flowrate(4) - mass_flowrate(5);    %stream 25 represents split before reformer
@@ -103,8 +105,7 @@ steam2Carb = 3;
 mass_flowrate(6) = mass_flowrate(5)*(MW_H2O/MW_NG_4)*steam2Carb;
 mass_flowrate(7) = mass_flowrate(5) + mass_flowrate(6);
 % Then get property variation through the reformer
-% GASEQ used to solve: see Reformer.eq
-Tpsh(7,:) = [800+273.1 23*atm 14725.55 -7321.93];
+Tpsh(7,:) = [800+273.1 23*atm 14725.55 -7321.93];       %Reformer.eq
 
 % SOFC
 %Get the mass of air - ASSUMING conservation of mass
@@ -128,36 +129,101 @@ MW_H2 = 2;
 MW_O2 = 32;
 H2_MassFrac_7 = 0.06843;
 H2_MassFlow_7 = mass_flowrate(7)*H2_MassFrac_7;
-H2_MoleFlow_7 = H2_MassFlow_7/MW_H2;    %in Kmol
+H2_MoleFlow_7 = H2_MassFlow_7/MW_H2;    %Kmol
 
 Fuel_Util = 0.7;
-H2_MoleReactFlow = Fuel_Util*H2_MoleFlow_7;
-O2_MoleReactFlow = 0.5*H2_MoleReactFlow;
-O2_MassFrac_10 = 0.23156;
-O2_MoleFlow_10 = mass_flowrate(10)*O2_MassFrac_10/MW_O2;
-O2_MoleFlow_8 = O2_MoleFlow_10 - O2_MoleReactFlow;
-H2_MoleFlow_8 = H2_MoleFlow_7 - H2_MoleReactFlow;
-O2_Relative_H2_8_8 = O2_MoleFlow_8/H2_MoleFlow_8;
-O2_Relative_H2_10_8 = O2_MoleFlow_10/H2_MoleFlow_8;
+H2_MoleReactFlow = Fuel_Util*H2_MoleFlow_7; %Kmol
+O2_MoleReactFlow = 0.5*H2_MoleReactFlow;    %Kmol
+O2_MassFrac_10 = 0.23156;                   %Kg
+O2_MoleFlow_10 = mass_flowrate(10)*O2_MassFrac_10/MW_O2; %Kmol
+O2_MoleFlow_8 = O2_MoleFlow_10 - O2_MoleReactFlow;       %Kmol
+H2_MoleFlow_8 = H2_MoleFlow_7 - H2_MoleReactFlow;        %Kmol
+O2_Relative_H2_8_8 = O2_MoleFlow_8/H2_MoleFlow_8;        % -
+O2_Relative_H2_10_8 = O2_MoleFlow_10/H2_MoleFlow_8;      % - 
 
-Tpsh(8,:) = [900+273.1 23*atm 9113.37 -2249.13];    %GASEQ
+Tpsh(8,:) = [900+273.1 23*atm 9113.37 -2249.13];    %GASEQ - composition 8.eq
 mass_flowrate(8) = mass_flowrate(7) + mass_flowrate(10); %Assuming negligible electron mass loss
 Cp_8 = 1578.83;
 
-Tpsh(11,:) = [1940.9 23*atm 9740.3 -2249.13];       %GASEQ - Adiabatic
-Tpsh(12,:) = [1693.6 23*atm 9505.82 -2674.7];       %GASEQ - Iteration to find right enthalpy for pressure
+%Afterburner
+Tpsh(11,:) = [1940.9 23*atm 9740.3 -2249.13];       %GASEQ - Adiabatic - Afterburner.eq
+
+%Heat Exchanger
+% Remember to account for total enthalpy not specific
+Tpsh(12,:) = [1737 23*atm 9505.82 -2600.7];       %GASEQ - Iteration to find right enthalpy for pressure
 mass_flowrate(11) = mass_flowrate(8);
 mass_flowrate(12) = mass_flowrate(11);
 
 %% Gas Cycle
-%Figure out combustor incoming mole ratios of streams for GASEQ flows
+%Figure out combustor incoming mole ratios of streams for GASEQ flows -
+%Mixtures.eq
 MW_13 = 28.96;
 MW_25 = 17.27;
 MW_12 = 24.67;
+MW_8 = 24.11;
+%For putting into GASEQ
 mole_flowrate_13 = mass_flowrate(13)/MW_13;
 mole_flowrate_25 = mass_flowrate(25)/MW_25;
 mole_flowrate_12 = mass_flowrate(12)/MW_12;
+mass_flowrate(14) = mass_flowrate(13) + mass_flowrate(25) + mass_flowrate(12); 
+%Modelling as constant pressure combustion and then pressure loss in
+%piping or whatever for GASEQ const. P analysis, so both combustor and
+%combuster_pressureloss are relevant
+Tpsh(14,:) = [1852.9 23*atm*0.92 9079.58 -1481.82];   %GASEQ - Combuster.eq
+mass_flowrate(15) = mass_flowrate(14); 
+%Treating 14->15 as ideal gas (worst assumption as is ~15% drop in Cp)
+Gamma_14 = 1.250;   %GASEQ
+Tpsh(15,tInput) = Tpsh(14,tInput)*exp((Gamma_14 - 1)/(Gamma_14)*log(Tpsh(15,pInput)/Tpsh(14,pInput)));
+Tpsh(15,sInput:hInput) = [9133.20 -2742.21];    %GASEQ - Composition 15.eq
+Tpsh(16,sInput:hInput) = [8038.24 -3497.64];    %GASEQ - Composition 16.eq
+mass_flowrate(16) = mass_flowrate(15);
+%% Question 2
+% Volts per cell
+s0_H2O = 188;    %J/(mol K)
+h0_H2O = -241.8e3;  %J/mol
+s0_H2 = 130.7;    %J/(mol K)
+h0_H2 = 0;
+s0_O2 = 205.2;
+h0_O2 = 0;
+Ohmic_Loss = 0.11;  %From graph
+Activation_Loss = 0.37; %From Graph
+FARADAY = 96485.3329;   %C/mol
+electrons_released = 2;
+MoR_H2 = 0.05664;    % Mole Ratio to flow
+mol_H2 = 1;          % N
+R_uni = 8.3144598;   % J/?(K?*mol)
+AC_DC_eff = 0.93;
+current_density = 0.5;  %A/cm^2
+deltaH = h0_H2O - (0.5*h0_O2 + h0_H2);  %J/mol
+deltaS = s0_H2O - (0.5*s0_O2 + s0_H2);  %J/mol
+deltaG = deltaH - Tpsh(8,tInput)*deltaS; %J/mol
+actual_deltaH = h0_H2O*H2_MoleReactFlow ...
+    - (0.5*h0_O2*O2_MoleReactFlow + h0_H2*H2_MoleReactFlow);    %kJ - as flow is kmol
+actual_deltaS = H2_MoleReactFlow*(s0_H2O - (0.5*s0_O2 + s0_H2));    %kJ
+actual_deltaG = actual_deltaH - Tpsh(8,tInput)*actual_deltaS;       %kJ
+E0= -(deltaG/(electrons_released*FARADAY));     %V
+Emax = -deltaH/(electrons_released*FARADAY);    %V
+preLn = R_uni*Tpsh(8,tInput)/(electrons_released*FARADAY);  %V
+%Not quite right
+Cell_Voltage_Ideal = E0 - preLn*log((MoR_H2*0.7)^mol_H2O/((0.7*MoR_H2)^mol_H2*(MoR_H2*0.35)^mol_O2)) ...
+    - preLn*log(23)^(mol_H2O-mol_H2-mol_O2);
+Cell_Voltage_Real = Cell_Voltage_Ideal - (Ohmic_Loss + Activation_Loss);
+charge_flowrate = 2*H2_MoleReactFlow*FARADAY*1000;  %kMol flowrate
 
-Tpsh(14
+% Get powers
+DC_power = charge_flowrate*Cell_Voltage_Real;
+AC_power = AC_DC_eff * DC_power;
+Thermal_power = -actudeltaG*1000;
 
+% Get efficiencies
+Cell_V_Eff = Fuel_Util*Cell_Voltage_Real/Emax;
+Cell_T_Eff = deltaG/deltaH;
+Active_area = charge_flowrate/current_density;
+%Get GASEQ enthalpies and entropies for flow 6 to be abel to evaluate
+%change
+Tpsh(6,sInput:hInput) = [11073.55 -12341.49];
 
+%Get heat losses
+Heat_Reformer = Tpsh(7,hInput)*mass_flowrate(7) ...
+    - (Tpsh(6,hInput)*mass_flowrate(6) + Tpsh(5, hInput)*mass_flowrate(5)); %kJ
+Heat_Cell = actual_deltaH - actual_deltaG;    %kJ

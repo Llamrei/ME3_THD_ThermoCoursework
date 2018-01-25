@@ -1,5 +1,5 @@
-[Conditions] 0 
-  Equilibrium at defined T and P
+[Conditions] 1 
+  Adiabatic T and composition at const P 
 
 
 [Reactants]              No.moles   Mole fraction
@@ -19,43 +19,43 @@ N                        1.1931e-19  9.304e-23
 HCN                      1.0469e-04  8.164e-08
 
 [Products]               No.moles   Mole fraction
-H2O                      4.5658e+02  0.36432
-CO2                      9.1807e+01  0.07326
-CO                       1.0712e+01  0.00855
-O2                       3.2502e-13  2.593e-16
-H2                       4.2066e+01  0.03357
-CH4                      4.1232e-04  3.290e-07
-C2H6                     2.6732e-12  2.133e-15
-N2                       6.5204e+02  0.52029
-NO                       6.2807e-09  5.012e-12
-NO2                      1.9856e-17  1.584e-20
-NH3                      2.8282e-02  2.257e-05
-NH2                      5.7823e-09  4.614e-12
-N                        2.6444e-16  2.110e-19
-HCN                      5.8562e-06  4.673e-09
+H2O                      4.6832e+02  0.37368
+CO2                      8.0049e+01  0.06387
+CO                       2.2471e+01  0.01793
+O2                       4.2396e-04  3.383e-07
+H2                       3.0359e+01  0.02422
+CH4                      3.1535e-08  2.516e-11
+C2H6                     5.0323e-19  4.015e-22
+N2                       6.5204e+02  0.52028
+NO                       8.9076e-03  7.108e-06
+NO2                      9.7073e-08  7.746e-11
+NH3                      1.8057e-03  1.441e-06
+NH2                      7.3372e-06  5.854e-09
+N                        7.0153e-08  5.598e-11
+HCN                      6.5603e-06  5.235e-09
 
 [Properties]             Reactants     Products
-Temperature,K               1173.2     1173.2
+Temperature,K               1173.2     1940.9
 Pressure,atm                23.        23.
-Volume_Ratio                1          0.977
-Moles Prod/React                       0.977337
+Volume_Ratio                1          1.617
+Moles Prod/React                       0.977356
 Stoichimetry,Phi                       1.293
-H0,  kJ/mol                 -54.231    -87.317
-S0,  J/mol/K                245.810    245.578
-Cp,  J/mol/K                38.069     38.775
-Gamma, Cp/Cv                1.279      1.273
+H0,  kJ/mol                 -54.231    -55.487
+S0,  J/mol/K                245.810    266.364
+Cp,  J/mol/K                38.069     42.950
+Gamma, Cp/Cv                1.279      1.240
 Mean Molecular Weight, g    24.11      24.67
-Density,  kg/m3             5.7605     5.89409
-Sound speed,  m/s           719.2      709.2
-Enthalpy, H,  kJ/kg         -2249.13   -3539.25
-Entropy,  S,  J/kg/K        9113.37    8897.38
-Intern Energy, U,  kJ/kg    -2653.67   -3934.62
-Free Energy, G, kJ/kg       -12940.94  -13977.65
-Cp, J/kg/K                  1578.83    1571.69
-Volume/mole,  m3            4.1857     4.186
-Molecules/cc                1.44E+20   1.44E+20
-Moles/cc                    2.39E-04   2.39E-04
-Viscosity,  kg/m/s          4.53E-05   4.50E-05
-KinematicVisc,  m2/s        7.87E-06   7.64E-06
-ThermCond,J/m/K/s           9.60E-02   9.22E-02
-ThDiffusivity,  m2/s        1.06E-05   9.95E-06
+Density,  kg/m3             5.7605     3.56273
+Sound speed,  m/s           719.2      900.4
+Enthalpy, H,  kJ/kg         -2249.13   -2249.13
+Entropy,  S,  J/kg/K        9113.37    9740.13
+Intern Energy, U,  kJ/kg    -2653.67   -2903.22
+Free Energy, G, kJ/kg       -12940.94  -21153.37
+Cp, J/kg/K                  1578.83    1740.95
+Volume/mole,  m3            4.1857     6.925
+Molecules/cc                1.44E+20   8.70E+19
+Moles/cc                    2.39E-04   1.44E-04
+Viscosity,  kg/m/s          4.53E-05   6.50E-05
+KinematicVisc,  m2/s        7.87E-06   1.82E-05
+ThermCond,J/m/K/s           9.60E-02   1.43E-01
+ThDiffusivity,  m2/s        1.06E-05   2.31E-05

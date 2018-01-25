@@ -14,7 +14,7 @@ N2                       6.5204e+02  0.52028
 NO                       8.9076e-03  7.108e-06
 NO2                      9.7073e-08  7.746e-11
 NH3                      1.8057e-03  1.441e-06
-NH2                      7.3372e-06  5.854e-09
+NH2                      7.3372e-06  5.855e-09
 N                        7.0153e-08  5.598e-11
 HCN                      6.5603e-06  5.235e-09
 
@@ -35,23 +35,23 @@ N                        9.4543e-10  7.544e-13
 HCN                      6.7272e-06  5.368e-09
 
 [Properties]             Reactants     Products
-Temperature,K               1693.6     1695.1
+Temperature,K               1737.      1695.1
 Pressure,atm                23.        23.
 Volume_Ratio                1          1.001
-Moles Prod/React                       0.999995
-Stoichimetry,Phi                       62284.093
+Moles Prod/React                       1.000001
+Stoichimetry,Phi                       62283.862
 H0,  kJ/mol                 -65.979    -65.979
-S0,  J/mol/K                260.583    260.587
+S0,  J/mol/K                260.583    260.586
 Cp,  J/mol/K                41.871     41.896
 Gamma, Cp/Cv                1.248      1.248
 Mean Molecular Weight, g    24.67      24.67
-Density,  kg/m3             4.0829     4.07925
+Density,  kg/m3             4.0829     4.07929
 Sound speed,  m/s           843.7      844.0
-Enthalpy, H,  kJ/kg         -2674.39   -2674.39
-Entropy,  S,  J/kg/K        9505.82    9505.92
-Intern Energy, U,  kJ/kg    -3245.15   -3245.66
-Free Energy, G, kJ/kg       -18773.45  -18788.03
-Cp, J/kg/K                  1697.23    1698.21
+Enthalpy, H,  kJ/kg         -2674.40   -2674.40
+Entropy,  S,  J/kg/K        9505.82    9505.89
+Intern Energy, U,  kJ/kg    -3245.16   -3245.67
+Free Energy, G, kJ/kg       -18773.45  -18787.84
+Cp, J/kg/K                  1697.23    1698.20
 Volume/mole,  m3            6.0424     6.048
 Molecules/cc                9.97E+19   9.96E+19
 Moles/cc                    1.65E-04   1.65E-04
