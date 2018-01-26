@@ -246,4 +246,29 @@ Tpsh(6,sInput:hInput) = [11073.55 -12341.49];
 Heat_Reformer = Tpsh(7,hInput)*mass_flowrate(7) ...
     - (Tpsh(6,hInput)*mass_flowrate(6) + Tpsh(5, hInput)*mass_flowrate(5)); %kJ - expect +ve
 Heat_Cell = actual_deltaH - actual_deltaG;    %kJ - expect -ve
-Net_Heat = Heat_Cell + Heat_Reformer;        %kJ - expect -ve
+Heat_Ohms = -1*(Ohmic_Loss * charge_flowrate);
+Net_Heat = Heat_Cell + Heat_Reformer + Heat_Ohms;        %kJ - expect -ve, watch out
+
+%% Question 3
+W_out_steam = -1*10^3*(mass_flowrate(18)*(Tpsh(18,hInput)-Tpsh(17,hInput))...
+    + mass_flowrate(21)*(Tpsh(21,hInput)-Tpsh(20,hInput)))
+W_out_air = -1*10^3*(mass_flowrate(15)*(Tpsh(15,hInput)-Tpsh(14,hInput)));
+W_out_gross = AC_power + W_out_steam + W_out_air;
+W_needed = -1*10^3*(mass_flowrate(4)*(Tpsh(4,hInput)-Tpsh(1,hInput))...
+    + mass_flowrate(3)*(Tpsh(3,hInput)-Tpsh(2,hInput))...
+    + mass_flowrate(24)*(Tpsh(24,hInput)-Tpsh(22,hInput))...
+    + mass_flowrate(23)*(Tpsh(22,hInput)-Tpsh(23,hInput)));
+W_out = W_out_gross + W_needed;
+
+LHV = 49304e3;
+Overall_eff = W_out/(mass_flowrate(1)*LHV);
+
+%Emissions
+MassR_CO2_16 = 0.11295;
+MassR_NOx_16 = 6.67e-12 + 2.44e-9;
+MassR_NOx_14 = 1.99e-3 + 1.17e-5;
+kWh = 3.6*10^6;
+emit_CO2 = mass_flowrate(16)*MassR_CO2_16/(W_out/kWh)*1000; %g/kWh
+emit_NOx = mass_flowrate(16)*MassR_NOx_16/(W_out/kWh)*1000; %g/kWh
+
+
